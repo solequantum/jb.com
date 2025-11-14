@@ -131,9 +131,16 @@
       font-size: 16px;
       font-weight: 400;
       display: flex;
-      gap: 8px;
-      align-items: center;
+      flex-direction: column;
+      gap: 5px;
+      align-items: flex-end;
       font-family: 'Space Grotesk', monospace;
+    }
+
+    .date-display {
+      font-size: 12px;
+      opacity: 0.8;
+      letter-spacing: 0.5px;
     }
 
     .time-ticker {
@@ -501,6 +508,20 @@
         gap: 10px;
       }
 
+      .datetime {
+        align-items: center;
+      }
+
+      .date-display {
+        font-size: 10px;
+      }
+
+      .flip-digit {
+        width: 24px;
+        height: 32px;
+        font-size: 16px;
+      }
+
       .glass-card {
         padding: 40px 30px;
       }
@@ -584,6 +605,7 @@
   <header class="header" id="header">
     <div class="logo">JB</div>
     <div class="datetime">
+      <div class="date-display" id="date-display"></div>
       <div class="time-ticker" id="time-ticker"></div>
     </div>
   </header>
@@ -657,6 +679,24 @@
         $('#loader').addClass('hidden');
       }, 1500);
 
+      // Date Display
+      function updateDateDisplay() {
+        var d = new Date();
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        var dayName = days[d.getDay()];
+        var monthName = months[d.getMonth()];
+        var date = d.getDate();
+        var year = d.getFullYear();
+
+        var dateString = dayName + ', ' + monthName + ' ' + date + ', ' + year;
+        $('#date-display').text(dateString);
+      }
+
+      updateDateDisplay();
+      setInterval(updateDateDisplay, 60000); // Update every minute
+
       // Flip Clock Time Ticker
       var previousTime = '';
 
@@ -708,25 +748,34 @@
       updateTimeTicker();
       setInterval(updateTimeTicker, 1000);
 
-      // Visitor Counter with localStorage
+      // Visitor Counter with localStorage and sessionStorage
       function initVisitorCounter() {
-        var visitors = localStorage.getItem('siteVisitors');
+        // Get total visitor count from localStorage
+        var totalVisitors = localStorage.getItem('siteVisitors');
 
-        if (!visitors) {
-          // Initialize with a realistic starting number
-          visitors = Math.floor(Math.random() * 500) + 1000;
-          localStorage.setItem('siteVisitors', visitors);
+        // Initialize total visitor count if it doesn't exist
+        if (!totalVisitors) {
+          totalVisitors = 1247; // Starting number
+          localStorage.setItem('siteVisitors', totalVisitors);
+        } else {
+          totalVisitors = parseInt(totalVisitors);
         }
 
-        // Increment visitor count
-        visitors = parseInt(visitors) + 1;
-        localStorage.setItem('siteVisitors', visitors);
-        localStorage.setItem('lastVisit', new Date().toISOString());
+        // Check if this session has already been counted
+        var sessionCounted = sessionStorage.getItem('visitorCounted');
+
+        if (!sessionCounted) {
+          // This is a new session, increment the counter
+          totalVisitors = totalVisitors + 1;
+          localStorage.setItem('siteVisitors', totalVisitors);
+          sessionStorage.setItem('visitorCounted', 'true');
+          localStorage.setItem('lastVisit', new Date().toISOString());
+        }
 
         // Animate counter
         var counter = $('#visitor-count');
         $({ countNum: 0 }).animate({
-          countNum: visitors
+          countNum: totalVisitors
         }, {
           duration: 2000,
           easing: 'swing',
@@ -734,7 +783,7 @@
             counter.text(Math.floor(this.countNum).toLocaleString());
           },
           complete: function() {
-            counter.text(visitors.toLocaleString());
+            counter.text(totalVisitors.toLocaleString());
           }
         });
       }
