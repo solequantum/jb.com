@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jeet Bhatt | IT Consultant & Tech Visionary</title>
+
+  <meta name="description" content="Hi, I'm Jeet Bhatt, providing IT consultancy to SPEC-INDIA since last 17 years. I'm an occasional blogger too." />
+  <link rel="canonical" href="https://www.jeetbbhatt.com/" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="jeetbbhatt/css/font-awesome/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #667eea;
+      --secondary-color: #764ba2;
+      --accent-color: #f093fb;
+      --text-light: #ffffff;
+      --text-dark: #1a202c;
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Animated Gradient Background */
+    .gradient-bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      z-index: -2;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Particle Container */
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float 20s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #f093fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .datetime {
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 20px 60px;
+      position: relative;
+    }
+
+    /* Glass Card */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 60px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      width: 100%;
+      animation: fadeInUp 1s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Avatar */
+    .avatar-container {
+      position: relative;
+      margin-bottom: 30px;
+      animation: float-avatar 3s ease-in-out infinite;
+    }
+
+    @keyframes float-avatar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .avatar-container:hover .avatar {
+      transform: scale(1.1);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .avatar-ring {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--accent-color);
+      border-right-color: var(--accent-color);
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Typography */
+    .main-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      margin: 20px 0;
+      background: linear-gradient(135deg, #fff, #f093fb, #fff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientText 3s ease infinite;
+    }
+
+    @keyframes gradientText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .sub-heading {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .sub-heading a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .sub-heading a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    .sub-heading a:hover::after {
+      width: 100%;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 40px;
+      max-width: 700px;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .social-link:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .social-link i {
+      font-size: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-link span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 5px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-20px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+
+    .scroll-indicator i {
+      font-size: 30px;
+      opacity: 0.7;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .glass-card {
+        padding: 40px 30px;
+      }
+
+      .main-heading {
+        font-size: 2.5rem;
+      }
+
+      .sub-heading {
+        font-size: 1.2rem;
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+
+      .social-links {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .stats-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading Animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    .loader-text {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <div class="loader-text">Loading...</div>
+    </div>
+  </div>
+
+  <!-- Animated Background -->
+  <div class="gradient-bg"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="logo">JB</div>
+    <div class="datetime" id="datetime"></div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="glass-card">
+      <!-- Avatar -->
+      <div class="avatar-container">
+        <div class="avatar-ring"></div>
+        <img src="jeetbbhatt/img/android-chrome-192x192.png" class="avatar" alt="Jeet Bhatt"/>
+      </div>
+
+      <!-- Main Content -->
+      <h1 class="main-heading">Jeet Bhatt</h1>
+      <h2 class="sub-heading">
+        Providing Exclusive IT Consultancy @ <a href="https://www.spec-india.com" target="_blank">SPEC-INDIA</a>
+      </h2>
+      <p class="description">
+        IT Consultant with 17+ years of experience & Occasional Blogger exploring History, Religions, Cultures,
+        Ancient Civilizations, Cosmology, Mathematics and Startups.
+      </p>
+
+      <!-- Stats -->
+      <div class="stats-section">
+        <div class="stat-card">
+          <div class="stat-number">17+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Ideas & Innovation</div>
+        </div>
+      </div>
+
+      <!-- Social Links -->
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/jeetbbhatt/" class="social-link" target="_blank">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+        </a>
+        <a href="mailto:connect@jeetbbhatt.com" class="social-link">
+          <i class="fa fa-envelope"></i>
+          <span>Email</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025-2030. Designed with ❤️ by <a href="https://www.jeetbbhatt.com/" target="_blank">Jeet Bhatt</a></p>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // Hide loader after page load
+      setTimeout(function() {
+        $('#loader').addClass('hidden');
+      }, 1500);
+
+      // Date and Time
+      function updateDateTime() {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var d = new Date();
+        var dayName = days[d.getDay()];
+        var date = d.getDate() + " " + months[d.getMonth()] + ", " + d.getFullYear();
+        var time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        $('#datetime').text(dayName + ", " + date + " • " + time);
+      }
+
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+
+      // Header scroll effect
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 50) {
+          $('#header').addClass('scrolled');
+        } else {
+          $('#header').removeClass('scrolled');
+        }
+      });
+
+      // Generate particles
+      function createParticles() {
+        var particlesContainer = $('#particles');
+        var particleCount = 50;
+
+        for (var i = 0; i < particleCount; i++) {
+          var particle = $('<div class="particle"></div>');
+          var startLeft = Math.random() * 100;
+          var delay = Math.random() * 20;
+          var duration = 15 + Math.random() * 10;
+
+          particle.css({
+            left: startLeft + '%',
+            animationDelay: delay + 's',
+            animationDuration: duration + 's'
+          });
+
+          particlesContainer.append(particle);
+        }
+      }
+
+      createParticles();
+
+      // Smooth scrolling for anchor links
+      $('a[href^="#"]').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+          $('html, body').stop().animate({
+            scrollTop: target.offset().top
+          }, 1000);
+        }
+      });
+
+      // Glass card hover effect - parallax
+      $('.glass-card').mousemove(function(e) {
+        var card = $(this);
+        var rect = this.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+
+        var centerX = rect.width / 2;
+        var centerY = rect.height / 2;
+
+        var deltaX = (x - centerX) / centerX;
+        var deltaY = (y - centerY) / centerY;
+
+        card.css('transform', 'perspective(1000px) rotateY(' + (deltaX * 5) + 'deg) rotateX(' + (-deltaY * 5) + 'deg)');
+      });
+
+      $('.glass-card').mouseleave(function() {
+        $(this).css('transform', 'perspective(1000px) rotateY(0deg) rotateX(0deg)');
+      });
+
+      // Counter animation
+      function animateCounter(element) {
+        var target = element.text();
+        if (target === '∞') return;
+
+        var count = parseInt(target);
+        if (isNaN(count)) return;
+
+        $({ countNum: 0 }).animate({
+          countNum: count
+        }, {
+          duration: 2000,
+          easing: 'swing',
+          step: function() {
+            element.text(Math.floor(this.countNum) + '+');
+          },
+          complete: function() {
+            element.text(count + '+');
+          }
+        });
+      }
+
+      // Trigger counter animation on scroll
+      var counterAnimated = false;
+      $(window).scroll(function() {
+        if (!counterAnimated && $('.stats-section').length) {
+          var statsTop = $('.stats-section').offset().top;
+          var windowBottom = $(window).scrollTop() + $(window).height();
+
+          if (windowBottom > statsTop) {
+            $('.stat-number').each(function() {
+              animateCounter($(this));
+            });
+            counterAnimated = true;
+          }
+        }
+      });
+
+      // Add ripple effect to social links
+      $('.social-link').on('mouseenter', function(e) {
+        var ripple = $('<span class="ripple"></span>');
+        $(this).append(ripple);
+
+        setTimeout(function() {
+          ripple.remove();
+        }, 600);
+      });
+    });
+  </script>
+</body>
+</html>
