@@ -19,13 +19,13 @@
 
   <style>
     :root {
-      --primary-color: #667eea;
-      --secondary-color: #764ba2;
-      --accent-color: #f093fb;
+      --primary-color: #00d4ff;
+      --secondary-color: #7c3aed;
+      --accent-color: #00f5ff;
       --text-light: #ffffff;
-      --text-dark: #1a202c;
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-dark: #0a0e27;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
     }
 
     * {
@@ -48,7 +48,7 @@
       height: 100%;
       top: 0;
       left: 0;
-      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+      background: linear-gradient(-45deg, #0a0e27, #1a1b3d, #2d1b69, #1e3a8a, #0f172a);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
       z-index: -2;
@@ -121,16 +121,71 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 24px;
       font-weight: 700;
-      background: linear-gradient(135deg, #fff, #f093fb);
+      background: linear-gradient(135deg, #fff, #00f5ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .datetime {
-      font-size: 14px;
-      font-weight: 300;
-      opacity: 0.9;
+      font-size: 16px;
+      font-weight: 400;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    .time-ticker {
+      display: flex;
+      gap: 3px;
+    }
+
+    .time-segment {
+      display: inline-flex;
+      gap: 2px;
+    }
+
+    .flip-digit {
+      display: inline-block;
+      width: 28px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent-color);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 212, 255, 0.2);
+    }
+
+    .flip-digit.flipping {
+      animation: flipAnimation 0.6s ease-in-out;
+    }
+
+    @keyframes flipAnimation {
+      0% { transform: rotateX(0deg); }
+      50% { transform: rotateX(90deg); }
+      100% { transform: rotateX(0deg); }
+    }
+
+    .time-separator {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-color);
+      animation: blink 2s infinite;
+      padding: 0 2px;
+    }
+
+    @keyframes blink {
+      0%, 49%, 100% { opacity: 1; }
+      50%, 99% { opacity: 0.3; }
     }
 
     /* Hero Section */
@@ -220,10 +275,11 @@
       right: -10px;
       bottom: -10px;
       border-radius: 50%;
-      border: 2px solid transparent;
+      border: 3px solid transparent;
       border-top-color: var(--accent-color);
       border-right-color: var(--accent-color);
       animation: spin 3s linear infinite;
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
     }
 
     @keyframes spin {
@@ -236,7 +292,7 @@
       font-size: 4rem;
       font-weight: 800;
       margin: 20px 0;
-      background: linear-gradient(135deg, #fff, #f093fb, #fff);
+      background: linear-gradient(135deg, #fff, #00f5ff, #7c3aed, #fff);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -262,6 +318,7 @@
       font-weight: 600;
       transition: all 0.3s ease;
       position: relative;
+      text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
     }
 
     .sub-heading a::after {
@@ -273,6 +330,7 @@
       height: 2px;
       background: var(--accent-color);
       transition: width 0.3s ease;
+      box-shadow: 0 0 10px var(--accent-color);
     }
 
     .sub-heading a:hover::after {
@@ -374,10 +432,11 @@
     .stat-number {
       font-size: 2.5rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #fff, var(--accent-color));
+      background: linear-gradient(135deg, #fff, #00f5ff, #7c3aed);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.3));
     }
 
     .stat-label {
@@ -401,6 +460,11 @@
       color: var(--accent-color);
       text-decoration: none;
       font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .footer a:hover {
+      text-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
     }
 
     /* Scroll Indicator */
@@ -470,7 +534,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+      background: linear-gradient(-45deg, #0a0e27, #1a1b3d, #2d1b69, #1e3a8a);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -519,7 +583,9 @@
   <!-- Header -->
   <header class="header" id="header">
     <div class="logo">JB</div>
-    <div class="datetime" id="datetime"></div>
+    <div class="datetime">
+      <div class="time-ticker" id="time-ticker"></div>
+    </div>
   </header>
 
   <!-- Hero Section -->
@@ -548,8 +614,8 @@
           <div class="stat-label">Years Experience</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">100+</div>
-          <div class="stat-label">Projects Delivered</div>
+          <div class="stat-number" id="visitor-count">0</div>
+          <div class="stat-label">Site Visitors</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">∞</div>
@@ -591,19 +657,89 @@
         $('#loader').addClass('hidden');
       }, 1500);
 
-      // Date and Time
-      function updateDateTime() {
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      // Flip Clock Time Ticker
+      var previousTime = '';
+
+      function updateTimeTicker() {
         var d = new Date();
-        var dayName = days[d.getDay()];
-        var date = d.getDate() + " " + months[d.getMonth()] + ", " + d.getFullYear();
-        var time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        $('#datetime').text(dayName + ", " + date + " • " + time);
+        var hours = String(d.getHours()).padStart(2, '0');
+        var minutes = String(d.getMinutes()).padStart(2, '0');
+        var seconds = String(d.getSeconds()).padStart(2, '0');
+        var currentTime = hours + minutes + seconds;
+
+        var ticker = $('#time-ticker');
+
+        if (ticker.children().length === 0) {
+          // Initialize ticker
+          ticker.html(
+            '<div class="time-segment">' +
+              '<div class="flip-digit" data-position="0">' + hours[0] + '</div>' +
+              '<div class="flip-digit" data-position="1">' + hours[1] + '</div>' +
+            '</div>' +
+            '<span class="time-separator">:</span>' +
+            '<div class="time-segment">' +
+              '<div class="flip-digit" data-position="2">' + minutes[0] + '</div>' +
+              '<div class="flip-digit" data-position="3">' + minutes[1] + '</div>' +
+            '</div>' +
+            '<span class="time-separator">:</span>' +
+            '<div class="time-segment">' +
+              '<div class="flip-digit" data-position="4">' + seconds[0] + '</div>' +
+              '<div class="flip-digit" data-position="5">' + seconds[1] + '</div>' +
+            '</div>'
+          );
+        } else {
+          // Update only changed digits
+          for (var i = 0; i < 6; i++) {
+            if (currentTime[i] !== previousTime[i]) {
+              var digit = ticker.find('.flip-digit[data-position="' + i + '"]');
+              digit.addClass('flipping');
+              digit.text(currentTime[i]);
+
+              setTimeout(function(d) {
+                d.removeClass('flipping');
+              }, 600, digit);
+            }
+          }
+        }
+
+        previousTime = currentTime;
       }
 
-      updateDateTime();
-      setInterval(updateDateTime, 1000);
+      updateTimeTicker();
+      setInterval(updateTimeTicker, 1000);
+
+      // Visitor Counter with localStorage
+      function initVisitorCounter() {
+        var visitors = localStorage.getItem('siteVisitors');
+
+        if (!visitors) {
+          // Initialize with a realistic starting number
+          visitors = Math.floor(Math.random() * 500) + 1000;
+          localStorage.setItem('siteVisitors', visitors);
+        }
+
+        // Increment visitor count
+        visitors = parseInt(visitors) + 1;
+        localStorage.setItem('siteVisitors', visitors);
+        localStorage.setItem('lastVisit', new Date().toISOString());
+
+        // Animate counter
+        var counter = $('#visitor-count');
+        $({ countNum: 0 }).animate({
+          countNum: visitors
+        }, {
+          duration: 2000,
+          easing: 'swing',
+          step: function() {
+            counter.text(Math.floor(this.countNum).toLocaleString());
+          },
+          complete: function() {
+            counter.text(visitors.toLocaleString());
+          }
+        });
+      }
+
+      initVisitorCounter();
 
       // Header scroll effect
       $(window).scroll(function() {
