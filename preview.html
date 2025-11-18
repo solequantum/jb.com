@@ -962,61 +962,43 @@
         var dayNightIcon = isDayTime ? '☀️' : '🌙';
         var dayNightText = isDayTime ? 'Day' : 'Night';
 
-        // Get user's location and fetch weather
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            function(position) {
-              var lat = position.coords.latitude;
-              var lon = position.coords.longitude;
+        // Try to fetch weather using wttr.in with CORS proxy or direct
+        fetch('https://wttr.in/?format=j1', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+          .then(response => {
+            if (!response.ok) throw new Error('Weather API failed');
+            return response.json();
+          })
+          .then(data => {
+            console.log('Weather data:', data); // Debug log
+            var temp = data.current_condition[0].temp_C;
+            var weatherIcon = getWeatherIcon(data.current_condition[0].weatherCode);
 
-              // Fetch weather from wttr.in (free, no API key needed)
-              fetch('https://wttr.in/?format=j1')
-                .then(response => response.json())
-                .then(data => {
-                  var temp = data.current_condition[0].temp_C;
-                  var weather = data.current_condition[0].weatherDesc[0].value;
-                  var weatherIcon = getWeatherIcon(data.current_condition[0].weatherCode);
-
-                  $('#weather-info').html(
-                    '<div class="weather-item">' +
-                      '<i class="' + weatherIcon + ' weather-icon"></i>' +
-                      '<span>' + temp + '°C</span>' +
-                    '</div>' +
-                    '<div class="weather-item day-night-indicator">' +
-                      '<span>' + dayNightIcon + '</span>' +
-                      '<span>' + dayNightText + '</span>' +
-                    '</div>'
-                  );
-                })
-                .catch(function(error) {
-                  // Fallback if weather API fails
-                  $('#weather-info').html(
-                    '<div class="weather-item day-night-indicator">' +
-                      '<span>' + dayNightIcon + '</span>' +
-                      '<span>' + dayNightText + '</span>' +
-                    '</div>'
-                  );
-                });
-            },
-            function(error) {
-              // Fallback if geolocation fails
-              $('#weather-info').html(
-                '<div class="weather-item day-night-indicator">' +
-                  '<span>' + dayNightIcon + '</span>' +
-                  '<span>' + dayNightText + '</span>' +
-                '</div>'
-              );
-            }
-          );
-        } else {
-          // Fallback if geolocation not supported
-          $('#weather-info').html(
-            '<div class="weather-item day-night-indicator">' +
-              '<span>' + dayNightIcon + '</span>' +
-              '<span>' + dayNightText + '</span>' +
-            '</div>'
-          );
-        }
+            $('#weather-info').html(
+              '<div class="weather-item">' +
+                '<i class="' + weatherIcon + ' weather-icon"></i>' +
+                '<span>' + temp + '°C</span>' +
+              '</div>' +
+              '<div class="weather-item day-night-indicator">' +
+                '<span>' + dayNightIcon + '</span>' +
+                '<span>' + dayNightText + '</span>' +
+              '</div>'
+            );
+          })
+          .catch(function(error) {
+            console.log('Weather fetch error:', error); // Debug log
+            // Fallback: Just show day/night indicator
+            $('#weather-info').html(
+              '<div class="weather-item day-night-indicator">' +
+                '<span>' + dayNightIcon + '</span>' +
+                '<span>' + dayNightText + '</span>' +
+              '</div>'
+            );
+          });
       }
 
       function getWeatherIcon(code) {
