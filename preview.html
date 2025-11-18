@@ -152,6 +152,36 @@
       gap: 3px;
     }
 
+    .weather-info {
+      font-size: 11px;
+      opacity: 0.85;
+      margin-top: 5px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .weather-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .weather-icon {
+      font-size: 14px;
+    }
+
+    .day-night-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      background: rgba(0, 245, 255, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(0, 245, 255, 0.3);
+    }
+
     .time-segment {
       display: inline-flex;
       gap: 2px;
@@ -628,6 +658,15 @@
         font-size: 16px;
       }
 
+      .weather-info {
+        font-size: 10px;
+        justify-content: center;
+      }
+
+      .weather-icon {
+        font-size: 12px;
+      }
+
       .glass-card {
         padding: 40px 30px;
       }
@@ -749,6 +788,12 @@
     <div class="datetime">
       <div class="date-display" id="date-display"></div>
       <div class="time-ticker" id="time-ticker"></div>
+      <div class="weather-info" id="weather-info">
+        <div class="weather-item">
+          <i class="fas fa-spinner fa-spin weather-icon"></i>
+          <span>Loading...</span>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -908,6 +953,131 @@
 
       updateTimeTicker();
       setInterval(updateTimeTicker, 1000);
+
+      // Weather and Day/Night Info
+      function updateWeatherInfo() {
+        // Determine day or night based on local time
+        var hour = new Date().getHours();
+        var isDayTime = hour >= 6 && hour < 18;
+        var dayNightIcon = isDayTime ? '☀️' : '🌙';
+        var dayNightText = isDayTime ? 'Day' : 'Night';
+
+        // Get user's location and fetch weather
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              var lat = position.coords.latitude;
+              var lon = position.coords.longitude;
+
+              // Fetch weather from wttr.in (free, no API key needed)
+              fetch('https://wttr.in/?format=j1')
+                .then(response => response.json())
+                .then(data => {
+                  var temp = data.current_condition[0].temp_C;
+                  var weather = data.current_condition[0].weatherDesc[0].value;
+                  var weatherIcon = getWeatherIcon(data.current_condition[0].weatherCode);
+
+                  $('#weather-info').html(
+                    '<div class="weather-item">' +
+                      '<i class="' + weatherIcon + ' weather-icon"></i>' +
+                      '<span>' + temp + '°C</span>' +
+                    '</div>' +
+                    '<div class="weather-item day-night-indicator">' +
+                      '<span>' + dayNightIcon + '</span>' +
+                      '<span>' + dayNightText + '</span>' +
+                    '</div>'
+                  );
+                })
+                .catch(function(error) {
+                  // Fallback if weather API fails
+                  $('#weather-info').html(
+                    '<div class="weather-item day-night-indicator">' +
+                      '<span>' + dayNightIcon + '</span>' +
+                      '<span>' + dayNightText + '</span>' +
+                    '</div>'
+                  );
+                });
+            },
+            function(error) {
+              // Fallback if geolocation fails
+              $('#weather-info').html(
+                '<div class="weather-item day-night-indicator">' +
+                  '<span>' + dayNightIcon + '</span>' +
+                  '<span>' + dayNightText + '</span>' +
+                '</div>'
+              );
+            }
+          );
+        } else {
+          // Fallback if geolocation not supported
+          $('#weather-info').html(
+            '<div class="weather-item day-night-indicator">' +
+              '<span>' + dayNightIcon + '</span>' +
+              '<span>' + dayNightText + '</span>' +
+            '</div>'
+          );
+        }
+      }
+
+      function getWeatherIcon(code) {
+        // Weather code to Font Awesome icon mapping
+        var iconMap = {
+          '113': 'fas fa-sun',           // Sunny
+          '116': 'fas fa-cloud-sun',     // Partly cloudy
+          '119': 'fas fa-cloud',         // Cloudy
+          '122': 'fas fa-cloud',         // Overcast
+          '143': 'fas fa-smog',          // Mist
+          '176': 'fas fa-cloud-rain',    // Patchy rain possible
+          '179': 'fas fa-cloud-snow',    // Patchy snow possible
+          '182': 'fas fa-cloud-rain',    // Patchy sleet possible
+          '185': 'fas fa-cloud-rain',    // Patchy freezing drizzle
+          '200': 'fas fa-bolt',          // Thundery outbreaks
+          '227': 'fas fa-snowflake',     // Blowing snow
+          '230': 'fas fa-snowflake',     // Blizzard
+          '248': 'fas fa-smog',          // Fog
+          '260': 'fas fa-smog',          // Freezing fog
+          '263': 'fas fa-cloud-rain',    // Patchy light drizzle
+          '266': 'fas fa-cloud-rain',    // Light drizzle
+          '281': 'fas fa-cloud-rain',    // Freezing drizzle
+          '284': 'fas fa-cloud-rain',    // Heavy freezing drizzle
+          '293': 'fas fa-cloud-rain',    // Patchy light rain
+          '296': 'fas fa-cloud-rain',    // Light rain
+          '299': 'fas fa-cloud-showers-heavy', // Moderate rain
+          '302': 'fas fa-cloud-showers-heavy', // Heavy rain
+          '305': 'fas fa-cloud-showers-heavy', // Heavy rain
+          '308': 'fas fa-cloud-showers-heavy', // Heavy rain
+          '311': 'fas fa-cloud-rain',    // Light freezing rain
+          '314': 'fas fa-cloud-rain',    // Moderate/heavy freezing rain
+          '317': 'fas fa-cloud-rain',    // Light sleet
+          '320': 'fas fa-cloud-rain',    // Moderate/heavy sleet
+          '323': 'fas fa-snowflake',     // Patchy light snow
+          '326': 'fas fa-snowflake',     // Light snow
+          '329': 'fas fa-snowflake',     // Patchy moderate snow
+          '332': 'fas fa-snowflake',     // Moderate snow
+          '335': 'fas fa-snowflake',     // Patchy heavy snow
+          '338': 'fas fa-snowflake',     // Heavy snow
+          '350': 'fas fa-cloud-rain',    // Ice pellets
+          '353': 'fas fa-cloud-rain',    // Light rain shower
+          '356': 'fas fa-cloud-showers-heavy', // Moderate/heavy rain shower
+          '359': 'fas fa-cloud-showers-heavy', // Torrential rain shower
+          '362': 'fas fa-cloud-rain',    // Light sleet showers
+          '365': 'fas fa-cloud-rain',    // Moderate/heavy sleet showers
+          '368': 'fas fa-snowflake',     // Light snow showers
+          '371': 'fas fa-snowflake',     // Moderate/heavy snow showers
+          '374': 'fas fa-cloud-rain',    // Light showers of ice pellets
+          '377': 'fas fa-cloud-rain',    // Moderate/heavy showers of ice pellets
+          '386': 'fas fa-bolt',          // Patchy light rain with thunder
+          '389': 'fas fa-bolt',          // Moderate/heavy rain with thunder
+          '392': 'fas fa-bolt',          // Patchy light snow with thunder
+          '395': 'fas fa-bolt'           // Moderate/heavy snow with thunder
+        };
+
+        return iconMap[code] || 'fas fa-cloud';
+      }
+
+      updateWeatherInfo();
+      // Update weather every 30 minutes
+      setInterval(updateWeatherInfo, 1800000);
 
       // Image Carousel
       var currentSlide = 0;
