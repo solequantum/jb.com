@@ -121,16 +121,6 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
-    .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #fff, #00f5ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
     .datetime {
       font-size: 16px;
       font-weight: 400;
@@ -153,11 +143,10 @@
     }
 
     .weather-info {
-      font-size: 11px;
-      opacity: 0.85;
-      margin-top: 5px;
+      font-size: 13px;
+      opacity: 0.9;
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -165,21 +154,22 @@
     .weather-item {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
 
     .weather-icon {
-      font-size: 14px;
+      font-size: 16px;
     }
 
     .day-night-indicator {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 3px 8px;
-      background: rgba(0, 245, 255, 0.1);
-      border-radius: 10px;
-      border: 1px solid rgba(0, 245, 255, 0.3);
+      gap: 6px;
+      padding: 5px 12px;
+      background: rgba(0, 245, 255, 0.15);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 245, 255, 0.4);
+      font-weight: 500;
     }
 
     .time-segment {
@@ -659,12 +649,16 @@
       }
 
       .weather-info {
-        font-size: 10px;
-        justify-content: center;
+        font-size: 11px;
+        gap: 8px;
       }
 
       .weather-icon {
-        font-size: 12px;
+        font-size: 14px;
+      }
+
+      .day-night-indicator {
+        padding: 4px 10px;
       }
 
       .glass-card {
@@ -784,16 +778,15 @@
 
   <!-- Header -->
   <header class="header" id="header">
-    <div class="logo">JB</div>
+    <div class="weather-info" id="weather-info">
+      <div class="weather-item">
+        <i class="fas fa-spinner fa-spin weather-icon"></i>
+        <span>Loading...</span>
+      </div>
+    </div>
     <div class="datetime">
       <div class="date-display" id="date-display"></div>
       <div class="time-ticker" id="time-ticker"></div>
-      <div class="weather-info" id="weather-info">
-        <div class="weather-item">
-          <i class="fas fa-spinner fa-spin weather-icon"></i>
-          <span>Loading...</span>
-        </div>
-      </div>
     </div>
   </header>
 
