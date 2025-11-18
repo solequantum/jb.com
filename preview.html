@@ -421,7 +421,7 @@
     /* Dice Game */
     .dice-game-container {
       margin-top: 40px;
-      padding: 30px;
+      padding: 20px;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
       border-radius: 20px;
@@ -437,9 +437,9 @@
 
     .dice-game-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       background: linear-gradient(135deg, #fff, #00f5ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -451,7 +451,7 @@
       gap: 20px;
       justify-content: center;
       align-items: center;
-      margin: 30px 0;
+      margin: 20px 0;
       flex-wrap: wrap;
     }
 
@@ -599,155 +599,15 @@
     }
 
     .dice-result {
-      margin-top: 20px;
-      font-size: 1.2rem;
+      margin-top: 15px;
+      font-size: 1.1rem;
       font-weight: 500;
       opacity: 0.9;
-      min-height: 30px;
+      min-height: 25px;
     }
 
     .dice-result.show {
       animation: fadeInUp 0.5s ease;
-    }
-
-    /* Carousel Card */
-    .carousel-card {
-      margin-top: 60px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0;
-      overflow: hidden;
-      min-height: 350px;
-      transition: all 0.3s ease;
-    }
-
-    .carousel-card:hover {
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .carousel-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .carousel-slides {
-      width: 100%;
-      height: 350px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .carousel-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .carousel-slide.active {
-      opacity: 1;
-      z-index: 1;
-    }
-
-    .carousel-slide img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 20px 20px 0 0;
-    }
-
-    .carousel-caption {
-      width: 100%;
-      padding: 20px;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 600;
-      background: rgba(0, 245, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(0, 245, 255, 0.3);
-    }
-
-    .carousel-btn {
-      position: absolute;
-      top: 40%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: var(--accent-color);
-      font-size: 32px;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      padding: 0;
-    }
-
-    .carousel-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-50%) scale(1.1);
-      box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
-    }
-
-    .carousel-prev {
-      left: 15px;
-    }
-
-    .carousel-next {
-      right: 15px;
-    }
-
-    .carousel-dots {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 10;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .carousel-dot.active {
-      background: var(--accent-color);
-      box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
-      width: 24px;
-      border-radius: 4px;
-    }
-
-    .carousel-dot:hover {
-      background: rgba(0, 245, 255, 0.6);
-      transform: scale(1.2);
     }
 
     /* Footer */
@@ -841,36 +701,14 @@
         gap: 15px;
       }
 
-      .carousel-card {
-        margin-top: 40px;
-        min-height: 250px;
+      .dice {
+        width: 70px;
+        height: 70px;
       }
 
-      .carousel-slides {
-        height: 250px;
-      }
-
-      .carousel-slide img {
-        height: 180px;
-      }
-
-      .carousel-caption {
-        padding: 15px;
-        font-size: 0.9rem;
-      }
-
-      .carousel-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 24px;
-      }
-
-      .carousel-prev {
-        left: 5px;
-      }
-
-      .carousel-next {
-        right: 5px;
+      .dice-face {
+        width: 70px;
+        height: 70px;
       }
     }
 
@@ -993,41 +831,6 @@
         <button class="roll-btn" id="rollBtn"><span>🎲 Roll Dice</span></button>
         <div class="dice-result" id="diceResult"></div>
       </div>
-
-      <!-- Carousel -->
-      <div class="carousel-card">
-        <div class="carousel-container">
-          <div class="carousel-slides">
-            <div class="carousel-slide active" data-theme="IT Technology">
-              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop" alt="IT Technology">
-              <div class="carousel-caption">IT Technology</div>
-            </div>
-            <div class="carousel-slide" data-theme="Blogging">
-              <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=400&fit=crop" alt="Blogging">
-              <div class="carousel-caption">Blogging</div>
-            </div>
-            <div class="carousel-slide" data-theme="Mathematics">
-              <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop" alt="Mathematics">
-              <div class="carousel-caption">Mathematics</div>
-            </div>
-            <div class="carousel-slide" data-theme="Cosmology">
-              <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&h=400&fit=crop" alt="Cosmology">
-              <div class="carousel-caption">Cosmology</div>
-            </div>
-            <div class="carousel-slide" data-theme="Cultures & Religions">
-              <img src="https://images.unsplash.com/photo-1609920658906-8223bd289001?w=800&h=400&fit=crop" alt="Cultures & Religions">
-              <div class="carousel-caption">Cultures & Religions</div>
-            </div>
-            <div class="carousel-slide" data-theme="Ancient Civilizations">
-              <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&h=400&fit=crop" alt="Ancient Civilizations">
-              <div class="carousel-caption">Ancient Civilizations</div>
-            </div>
-          </div>
-          <button class="carousel-btn carousel-prev">‹</button>
-          <button class="carousel-btn carousel-next">›</button>
-          <div class="carousel-dots"></div>
-        </div>
-      </div>
     </div>
 
     <!-- Scroll Indicator -->
@@ -1119,83 +922,6 @@
 
       updateTimeTicker();
       setInterval(updateTimeTicker, 1000);
-
-      // Image Carousel
-      var currentSlide = 0;
-      var slides = $('.carousel-slide');
-      var totalSlides = slides.length;
-      var autoRotateInterval;
-
-      // Initialize dots
-      function initCarouselDots() {
-        var dotsContainer = $('.carousel-dots');
-        for (var i = 0; i < totalSlides; i++) {
-          var dot = $('<div class="carousel-dot"></div>');
-          if (i === 0) dot.addClass('active');
-          dot.attr('data-slide', i);
-          dotsContainer.append(dot);
-        }
-
-        // Dot click handler
-        $('.carousel-dot').on('click', function() {
-          var slideIndex = parseInt($(this).attr('data-slide'));
-          goToSlide(slideIndex);
-          resetAutoRotate();
-        });
-      }
-
-      function goToSlide(index) {
-        slides.removeClass('active');
-        $('.carousel-dot').removeClass('active');
-
-        currentSlide = index;
-        if (currentSlide >= totalSlides) currentSlide = 0;
-        if (currentSlide < 0) currentSlide = totalSlides - 1;
-
-        $(slides[currentSlide]).addClass('active');
-        $('.carousel-dot[data-slide="' + currentSlide + '"]').addClass('active');
-      }
-
-      function nextSlide() {
-        goToSlide(currentSlide + 1);
-      }
-
-      function prevSlide() {
-        goToSlide(currentSlide - 1);
-      }
-
-      function startAutoRotate() {
-        autoRotateInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
-      }
-
-      function resetAutoRotate() {
-        clearInterval(autoRotateInterval);
-        startAutoRotate();
-      }
-
-      // Button click handlers
-      $('.carousel-prev').on('click', function() {
-        prevSlide();
-        resetAutoRotate();
-      });
-
-      $('.carousel-next').on('click', function() {
-        nextSlide();
-        resetAutoRotate();
-      });
-
-      // Pause on hover
-      $('.carousel-container').on('mouseenter', function() {
-        clearInterval(autoRotateInterval);
-      });
-
-      $('.carousel-container').on('mouseleave', function() {
-        startAutoRotate();
-      });
-
-      // Initialize carousel
-      initCarouselDots();
-      startAutoRotate();
 
       // Header scroll effect
       $(window).scroll(function() {
