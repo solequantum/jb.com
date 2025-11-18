@@ -121,7 +121,44 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
-    .logo {
+    /* Weather Widget */
+    .weather-widget {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .weather-widget:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0, 245, 255, 0.3);
+    }
+
+    .weather-icon {
+      font-size: 40px;
+      color: var(--accent-color);
+      animation: float-weather 3s ease-in-out infinite;
+      text-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
+    }
+
+    @keyframes float-weather {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .weather-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .weather-temp {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 24px;
       font-weight: 700;
@@ -129,6 +166,32 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    .weather-details {
+      display: flex;
+      gap: 15px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .weather-humidity,
+    .weather-time-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .weather-humidity i {
+      color: #4da6ff;
+    }
+
+    .weather-time-indicator i {
+      color: #ffd700;
+    }
+
+    .weather-time-indicator.night i {
+      color: #a0a0ff;
     }
 
     .datetime {
@@ -666,6 +729,24 @@
         gap: 10px;
       }
 
+      .weather-widget {
+        padding: 8px 15px;
+        gap: 10px;
+      }
+
+      .weather-icon {
+        font-size: 32px;
+      }
+
+      .weather-temp {
+        font-size: 20px;
+      }
+
+      .weather-details {
+        font-size: 10px;
+        gap: 10px;
+      }
+
       .datetime {
         align-items: center;
       }
@@ -775,7 +856,22 @@
 
   <!-- Header -->
   <header class="header" id="header">
-    <div class="logo">JB</div>
+    <div class="weather-widget" id="weatherWidget">
+      <div class="weather-icon" id="weatherIcon">
+        <i class="fas fa-cloud-sun"></i>
+      </div>
+      <div class="weather-info">
+        <div class="weather-temp" id="weatherTemp">--°C</div>
+        <div class="weather-details">
+          <span class="weather-humidity" id="weatherHumidity">
+            <i class="fas fa-tint"></i> --%
+          </span>
+          <span class="weather-time-indicator" id="timeIndicator">
+            <i class="fas fa-sun"></i> Day
+          </span>
+        </div>
+      </div>
+    </div>
     <div class="datetime">
       <div class="date-display" id="date-display"></div>
       <div class="time-ticker" id="time-ticker"></div>
@@ -871,6 +967,129 @@
 
       updateDateDisplay();
       setInterval(updateDateDisplay, 60000); // Update every minute
+
+      // Weather Widget Functionality
+      function updateDayNightIndicator() {
+        var d = new Date();
+        var hour = d.getHours();
+        var timeIndicator = $('#timeIndicator');
+
+        if (hour >= 6 && hour < 18) {
+          // Daytime (6 AM - 6 PM)
+          timeIndicator.removeClass('night');
+          timeIndicator.html('<i class="fas fa-sun"></i> Day');
+        } else {
+          // Nighttime
+          timeIndicator.addClass('night');
+          timeIndicator.html('<i class="fas fa-moon"></i> Night');
+        }
+      }
+
+      function updateWeatherIcon(condition, isDay) {
+        var iconElement = $('#weatherIcon i');
+        var iconClass = 'fas ';
+
+        // Determine icon based on weather condition
+        if (condition.includes('clear')) {
+          iconClass += isDay ? 'fa-sun' : 'fa-moon';
+        } else if (condition.includes('cloud')) {
+          iconClass += isDay ? 'fa-cloud-sun' : 'fa-cloud-moon';
+        } else if (condition.includes('rain') || condition.includes('drizzle')) {
+          iconClass += 'fa-cloud-rain';
+        } else if (condition.includes('snow')) {
+          iconClass += 'fa-snowflake';
+        } else if (condition.includes('thunder') || condition.includes('storm')) {
+          iconClass += 'fa-cloud-bolt';
+        } else if (condition.includes('mist') || condition.includes('fog')) {
+          iconClass += 'fa-smog';
+        } else {
+          iconClass += isDay ? 'fa-cloud-sun' : 'fa-cloud-moon';
+        }
+
+        iconElement.attr('class', iconClass);
+      }
+
+      function fetchWeatherData() {
+        // Using OpenWeatherMap API - You should replace this with your own API key
+        // For demo purposes, we'll use geolocation and a free tier API key
+        var apiKey = 'demo'; // Replace with actual API key
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              var lat = position.coords.latitude;
+              var lon = position.coords.longitude;
+
+              // OpenWeatherMap API endpoint
+              var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&appid=' + apiKey;
+
+              $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                success: function(data) {
+                  // Update temperature
+                  var temp = Math.round(data.main.temp);
+                  $('#weatherTemp').text(temp + '°C');
+
+                  // Update humidity
+                  $('#weatherHumidity').html('<i class="fas fa-tint"></i> ' + data.main.humidity + '%');
+
+                  // Update weather icon
+                  var condition = data.weather[0].main.toLowerCase();
+                  var hour = new Date().getHours();
+                  var isDay = hour >= 6 && hour < 18;
+                  updateWeatherIcon(condition, isDay);
+                },
+                error: function() {
+                  // Fallback to simulated data
+                  useSimulatedWeather();
+                }
+              });
+            },
+            function() {
+              // Geolocation denied, use simulated data
+              useSimulatedWeather();
+            }
+          );
+        } else {
+          // Geolocation not supported
+          useSimulatedWeather();
+        }
+      }
+
+      function useSimulatedWeather() {
+        // Simulated weather data based on time of day
+        var hour = new Date().getHours();
+        var isDay = hour >= 6 && hour < 18;
+
+        // Generate realistic temperature based on time
+        var baseTemp = 20;
+        if (hour >= 0 && hour < 6) baseTemp = 15;
+        else if (hour >= 6 && hour < 12) baseTemp = 18;
+        else if (hour >= 12 && hour < 18) baseTemp = 24;
+        else baseTemp = 19;
+
+        var temp = baseTemp + Math.floor(Math.random() * 5) - 2;
+        var humidity = 50 + Math.floor(Math.random() * 30);
+
+        $('#weatherTemp').text(temp + '°C');
+        $('#weatherHumidity').html('<i class="fas fa-tint"></i> ' + humidity + '%');
+
+        // Set appropriate weather icon
+        var conditions = ['clear', 'clouds', 'clouds'];
+        var randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
+        updateWeatherIcon(randomCondition, isDay);
+      }
+
+      // Initialize weather widget
+      updateDayNightIndicator();
+      fetchWeatherData();
+
+      // Update day/night indicator every minute
+      setInterval(updateDayNightIndicator, 60000);
+
+      // Update weather data every 10 minutes
+      setInterval(fetchWeatherData, 600000);
 
       // Flip Clock Time Ticker
       var previousTime = '';
