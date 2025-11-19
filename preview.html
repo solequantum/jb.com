@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jeet Bhatt | IT Consultant & Tech Visionary</title>
+
+  <meta name="description" content="Hi, I'm Jeet Bhatt, providing IT consultancy to SPEC-INDIA since last 17 years. I'm an occasional blogger too." />
+  <link rel="canonical" href="https://www.jeetbbhatt.com/" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="jeetbbhatt/css/font-awesome/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #ff9500;
+      --secondary-color: #7c3aed;
+      --accent-color: #ffaa00;
+      --text-light: #ffffff;
+      --text-dark: #0a0e27;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Animated Gradient Background with Multiple Images */
+    .gradient-bg-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+
+    .gradient-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .gradient-bg::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(-45deg, rgba(15, 15, 35, 0.20), rgba(26, 26, 46, 0.20), rgba(22, 33, 62, 0.20), rgba(15, 52, 96, 0.20), rgba(26, 26, 46, 0.20));
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .gradient-bg-1 {
+      background-image: url('https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=1920&h=1080&fit=crop&q=80');
+      opacity: 1;
+      animation: fadeInOut1 24s ease-in-out infinite;
+    }
+
+    .gradient-bg-2 {
+      background-image: url('https://wallpapers.com/images/hd/carina-nebula-5134-x-3301-wallpaper-o7prfb7orlbgifnz.jpg');
+      opacity: 0;
+      animation: fadeInOut2 24s ease-in-out infinite;
+    }
+
+    .gradient-bg-3 {
+      background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&h=1080&fit=crop&q=80');
+      opacity: 0;
+      animation: fadeInOut3 24s ease-in-out infinite;
+    }
+
+    @keyframes fadeInOut1 {
+      0% { opacity: 1; }
+      31.25% { opacity: 1; }
+      33.33% { opacity: 0; }
+      97.92% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeInOut2 {
+      0% { opacity: 0; }
+      33.33% { opacity: 0; }
+      35.42% { opacity: 1; }
+      64.58% { opacity: 1; }
+      66.67% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes fadeInOut3 {
+      0% { opacity: 0; }
+      66.67% { opacity: 0; }
+      68.75% { opacity: 1; }
+      97.92% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* Particle Container */
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float 20s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Weather Widget */
+    .weather-widget {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .weather-widget:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(255, 170, 0, 0.4);
+    }
+
+    .weather-icon {
+      font-size: 40px;
+      color: var(--accent-color);
+      animation: float-weather 3s ease-in-out infinite;
+      text-shadow: 0 0 20px rgba(255, 170, 0, 0.7);
+    }
+
+    @keyframes float-weather {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .weather-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .weather-temp {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #ffaa00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .weather-details {
+      display: flex;
+      gap: 15px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .weather-humidity,
+    .weather-time-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .weather-humidity i {
+      color: #4da6ff;
+    }
+
+    .weather-time-indicator i {
+      color: #ffd700;
+    }
+
+    .weather-time-indicator.night i {
+      color: #a0a0ff;
+    }
+
+    .datetime {
+      font-size: 16px;
+      font-weight: 400;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: flex-end;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    .date-display {
+      font-size: 12px;
+      opacity: 0.8;
+      letter-spacing: 0.5px;
+    }
+
+    .time-ticker {
+      display: flex;
+      gap: 3px;
+    }
+
+    .time-segment {
+      display: inline-flex;
+      gap: 2px;
+    }
+
+    .flip-digit {
+      display: inline-block;
+      width: 28px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent-color);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(255, 170, 0, 0.2);
+    }
+
+    .flip-digit.flipping {
+      animation: flipAnimation 0.6s ease-in-out;
+    }
+
+    @keyframes flipAnimation {
+      0% { transform: rotateX(0deg); }
+      50% { transform: rotateX(90deg); }
+      100% { transform: rotateX(0deg); }
+    }
+
+    .time-separator {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-color);
+      animation: blink 2s infinite;
+      padding: 0 2px;
+    }
+
+    @keyframes blink {
+      0%, 49%, 100% { opacity: 1; }
+      50%, 99% { opacity: 0.3; }
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 20px 60px;
+      position: relative;
+    }
+
+    /* Glass Card */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(0px);
+      border-radius: 30px;
+      padding: 60px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      width: 100%;
+      animation: fadeInUp 1s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Avatar */
+    .avatar-container {
+      position: relative;
+      animation: float-avatar 3s ease-in-out infinite;
+    }
+
+    @keyframes float-avatar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .avatar-container:hover .avatar {
+      transform: scale(1.1);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .avatar-ring {
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--accent-color);
+      border-right-color: var(--accent-color);
+      animation: spin 3s linear infinite;
+      box-shadow: 0 0 15px rgba(255, 170, 0, 0.7);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Typography */
+    .main-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      margin: 0;
+      background: linear-gradient(135deg, #fff, #ffaa00, #ff8c00, #fff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientText 3s ease infinite;
+    }
+
+    @keyframes gradientText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .sub-heading {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .sub-heading a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      text-shadow: 0 0 20px rgba(255, 170, 0, 0.6);
+    }
+
+    .sub-heading a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .sub-heading a:hover::after {
+      width: 100%;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 40px;
+      max-width: 700px;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .social-link:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .social-link i {
+      font-size: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-link span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Dice Game */
+    .dice-game-container {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .dice-game-container:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .dice-game-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #fff, #ffaa00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .dice-game-layout {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .dice-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dice-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+    }
+
+    .dice {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      cursor: pointer;
+    }
+
+    .dice.rolling {
+      animation: roll 0.8s ease-out;
+    }
+
+    @keyframes roll {
+      0% { transform: rotateX(0deg) rotateY(0deg); }
+      25% { transform: rotateX(180deg) rotateY(180deg); }
+      50% { transform: rotateX(360deg) rotateY(360deg); }
+      75% { transform: rotateX(540deg) rotateY(540deg); }
+      100% { transform: rotateX(720deg) rotateY(720deg); }
+    }
+
+    .dice-face {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(200, 200, 200, 0.9));
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 2px rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .dice-dot {
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle, #1a1a1a, #000);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Dice face layouts */
+    .dice-face-1 {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dice-face-2 {
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .dice-face-2 .dice-dot:first-child {
+      align-self: flex-start;
+    }
+
+    .dice-face-2 .dice-dot:last-child {
+      align-self: flex-end;
+    }
+
+    .dice-face-3 {
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .dice-face-3 .dice-dot:nth-child(1) {
+      align-self: flex-start;
+    }
+
+    .dice-face-3 .dice-dot:nth-child(3) {
+      align-self: flex-end;
+    }
+
+    .dice-face-4, .dice-face-5, .dice-face-6 {
+      justify-content: space-between;
+      align-content: space-between;
+    }
+
+    .dice-face-5 .dice-dot:nth-child(3) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .dice-face-6 {
+      padding: 10px 12px;
+    }
+
+    .roll-btn {
+      padding: 15px 40px;
+      background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+      border: none;
+      border-radius: 50px;
+      color: var(--text-light);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(255, 170, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roll-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .roll-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .roll-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 170, 0, 0.6);
+    }
+
+    .roll-btn:active {
+      transform: translateY(0);
+    }
+
+    .roll-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .dice-result {
+      font-size: 1.1rem;
+      font-weight: 500;
+      opacity: 0.9;
+      min-height: 25px;
+      text-align: center;
+    }
+
+    .dice-result.show {
+      animation: fadeInUp 0.5s ease;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .footer a:hover {
+      text-shadow: 0 0 10px rgba(255, 170, 0, 0.9);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .weather-widget {
+        padding: 8px 15px;
+        gap: 10px;
+      }
+
+      .weather-icon {
+        font-size: 32px;
+      }
+
+      .weather-temp {
+        font-size: 20px;
+      }
+
+      .weather-details {
+        font-size: 10px;
+        gap: 10px;
+      }
+
+      .datetime {
+        align-items: center;
+      }
+
+      .date-display {
+        font-size: 10px;
+      }
+
+      .flip-digit {
+        width: 24px;
+        height: 32px;
+        font-size: 16px;
+      }
+
+      .glass-card {
+        padding: 40px 30px;
+      }
+
+      .main-heading {
+        font-size: 2.5rem;
+      }
+
+      .sub-heading {
+        font-size: 1.2rem;
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+
+      .social-links {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .dice-game-layout {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .dice-area {
+        flex-direction: row;
+      }
+
+      .dice {
+        width: 70px;
+        height: 70px;
+      }
+
+      .dice-face {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    /* Loading Animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(-45deg, rgba(15, 15, 35, 0.95), rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95), rgba(15, 52, 96, 0.95)),
+        url('https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=1920&h=1080&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .spinner {
+      width: 80px;
+      height: 80px;
+      border: 5px solid rgba(255, 170, 0, 0.2);
+      border-top-color: var(--accent-color);
+      border-right-color: var(--accent-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+      box-shadow: 0 0 30px rgba(255, 170, 0, 0.5);
+    }
+
+    .loader-text {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--accent-color);
+      text-shadow: 0 0 20px rgba(255, 170, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <div class="loader-text">Loading...</div>
+    </div>
+  </div>
+
+  <!-- Animated Background -->
+  <div class="gradient-bg-container">
+    <div class="gradient-bg gradient-bg-1"></div>
+    <div class="gradient-bg gradient-bg-2"></div>
+    <div class="gradient-bg gradient-bg-3"></div>
+  </div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="weather-widget" id="weatherWidget">
+      <div class="weather-icon" id="weatherIcon">
+        <i class="fas fa-cloud-sun"></i>
+      </div>
+      <div class="weather-info">
+        <div class="weather-temp" id="weatherTemp">--°C</div>
+        <div class="weather-details">
+          <span class="weather-humidity" id="weatherHumidity">
+            <i class="fas fa-tint"></i> --%
+          </span>
+          <span class="weather-time-indicator" id="timeIndicator">
+            <i class="fas fa-sun"></i> Day
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="datetime">
+      <div class="date-display" id="date-display"></div>
+      <div class="time-ticker" id="time-ticker"></div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="glass-card">
+      <!-- Avatar -->
+      <div class="avatar-container">
+        <div class="avatar-ring"></div>
+        <img src="jeetbbhatt/img/android-chrome-192x192.png" class="avatar" alt="Jeet Bhatt"/>
+      </div>
+
+      <!-- Main Content -->
+      <h1 class="main-heading">Jeet Bhatt</h1>
+      <h2 class="sub-heading">
+        Providing Exclusive IT Consultancy @ <a href="https://www.spec-india.com" target="_blank">SPEC-INDIA</a>
+      </h2>
+      <p class="description">
+        IT Consultant with 17+ years of experience & Occasional Blogger exploring History, Religions, Cultures,
+        Ancient Civilizations, Cosmology, Mathematics and Startups.
+      </p>
+
+      <!-- Social Links -->
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/jeetbbhatt/" class="social-link" target="_blank">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+        </a>
+        <a href="mailto:connect@jeetbbhatt.com" class="social-link">
+          <i class="fa fa-envelope"></i>
+          <span>Email</span>
+        </a>
+      </div>
+
+      <!-- Dice Game -->
+      <div class="dice-game-container">
+        <h3 class="dice-game-title">🎲 Roll the Dice</h3>
+        <div class="dice-game-layout">
+          <div class="dice-area">
+            <div class="dice" id="dice1">
+              <div class="dice-face dice-face-1">
+                <div class="dice-dot"></div>
+              </div>
+            </div>
+            <div class="dice" id="dice2">
+              <div class="dice-face dice-face-1">
+                <div class="dice-dot"></div>
+              </div>
+            </div>
+          </div>
+          <div class="dice-controls">
+            <button class="roll-btn" id="rollBtn"><span>🎲 Roll Dice</span></button>
+            <div class="dice-result" id="diceResult"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025-2030. Designed with ❤️ by <a href="https://www.jeetbbhatt.com/" target="_blank">Jeet Bhatt</a></p>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // Hide loader after page load
+      setTimeout(function() {
+        $('#loader').addClass('hidden');
+      }, 1500);
+
+      // Date Display
+      function updateDateDisplay() {
+        var d = new Date();
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        var dayName = days[d.getDay()];
+        var monthName = months[d.getMonth()];
+        var date = d.getDate();
+        var year = d.getFullYear();
+
+        var dateString = dayName + ', ' + monthName + ' ' + date + ', ' + year;
+        $('#date-display').text(dateString);
+      }
+
+      updateDateDisplay();
+      setInterval(updateDateDisplay, 60000); // Update every minute
+
+      // Weather Widget Functionality
+      function updateDayNightIndicator() {
+        var d = new Date();
+        var hour = d.getHours();
+        var timeIndicator = $('#timeIndicator');
+
+        if (hour >= 6 && hour < 18) {
+          // Daytime (6 AM - 6 PM)
+          timeIndicator.removeClass('night');
+          timeIndicator.html('<i class="fas fa-sun"></i> Day');
+        } else {
+          // Nighttime
+          timeIndicator.addClass('night');
+          timeIndicator.html('<i class="fas fa-moon"></i> Night');
+        }
+      }
+
+      function updateWeatherIcon(condition, isDay) {
+        var iconElement = $('#weatherIcon i');
+        var iconClass = 'fas ';
+
+        // Determine icon based on weather condition
+        if (condition.includes('clear')) {
+          iconClass += isDay ? 'fa-sun' : 'fa-moon';
+        } else if (condition.includes('cloud')) {
+          iconClass += isDay ? 'fa-cloud-sun' : 'fa-cloud-moon';
+        } else if (condition.includes('rain') || condition.includes('drizzle')) {
+          iconClass += 'fa-cloud-rain';
+        } else if (condition.includes('snow')) {
+          iconClass += 'fa-snowflake';
+        } else if (condition.includes('thunder') || condition.includes('storm')) {
+          iconClass += 'fa-cloud-bolt';
+        } else if (condition.includes('mist') || condition.includes('fog')) {
+          iconClass += 'fa-smog';
+        } else {
+          iconClass += isDay ? 'fa-cloud-sun' : 'fa-cloud-moon';
+        }
+
+        iconElement.attr('class', iconClass);
+      }
+
+      function fetchWeatherData() {
+        // Using OpenWeatherMap API - You should replace this with your own API key
+        // For demo purposes, we'll use geolocation and a free tier API key
+        var apiKey = 'aa93d16070c4397e49b4cd61efb43826'; // Replace with actual API key
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              var lat = position.coords.latitude;
+              var lon = position.coords.longitude;
+
+              // OpenWeatherMap API endpoint
+              var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&appid=' + apiKey;
+
+              $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                success: function(data) {
+                  // Update temperature
+                  var temp = Math.round(data.main.temp);
+                  $('#weatherTemp').text(temp + '°C');
+
+                  // Update humidity
+                  $('#weatherHumidity').html('<i class="fas fa-tint"></i> ' + data.main.humidity + '%');
+
+                  // Update weather icon
+                  var condition = data.weather[0].main.toLowerCase();
+                  var hour = new Date().getHours();
+                  var isDay = hour >= 6 && hour < 18;
+                  updateWeatherIcon(condition, isDay);
+                },
+                error: function() {
+                  // Fallback to simulated data
+                  useSimulatedWeather();
+                }
+              });
+            },
+            function() {
+              // Geolocation denied, use simulated data
+              useSimulatedWeather();
+            }
+          );
+        } else {
+          // Geolocation not supported
+          useSimulatedWeather();
+        }
+      }
+
+      function useSimulatedWeather() {
+        // Simulated weather data based on time of day
+        var hour = new Date().getHours();
+        var isDay = hour >= 6 && hour < 18;
+
+        // Generate realistic temperature based on time
+        var baseTemp = 20;
+        if (hour >= 0 && hour < 6) baseTemp = 15;
+        else if (hour >= 6 && hour < 12) baseTemp = 18;
+        else if (hour >= 12 && hour < 18) baseTemp = 24;
+        else baseTemp = 19;
+
+        var temp = baseTemp + Math.floor(Math.random() * 5) - 2;
+        var humidity = 50 + Math.floor(Math.random() * 30);
+
+        $('#weatherTemp').text(temp + '°C');
+        $('#weatherHumidity').html('<i class="fas fa-tint"></i> ' + humidity + '%');
+
+        // Set appropriate weather icon
+        var conditions = ['clear', 'clouds', 'clouds'];
+        var randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
+        updateWeatherIcon(randomCondition, isDay);
+      }
+
+      // Initialize weather widget
+      updateDayNightIndicator();
+      fetchWeatherData();
+
+      // Update day/night indicator every minute
+      setInterval(updateDayNightIndicator, 60000);
+
+      // Update weather data every 10 minutes
+      setInterval(fetchWeatherData, 600000);
+
+      // Flip Clock Time Ticker
+      var previousTime = '';
+
+      function updateTimeTicker() {
+        var d = new Date();
+        var hours = String(d.getHours()).padStart(2, '0');
+        var minutes = String(d.getMinutes()).padStart(2, '0');
+        var seconds = String(d.getSeconds()).padStart(2, '0');
+        var currentTime = hours + minutes + seconds;
+
+        var ticker = $('#time-ticker');
+
+        if (ticker.children().length === 0) {
+          // Initialize ticker
+          ticker.html(
+            '<div class="time-segment">' +
+              '<div class="flip-digit" data-position="0">' + hours[0] + '</div>' +
+              '<div class="flip-digit" data-position="1">' + hours[1] + '</div>' +
+            '</div>' +
+            '<span class="time-separator">:</span>' +
+            '<div class="time-segment">' +
+              '<div class="flip-digit" data-position="2">' + minutes[0] + '</div>' +
+              '<div class="flip-digit" data-position="3">' + minutes[1] + '</div>' +
+            '</div>' +
+            '<span class="time-separator">:</span>' +
+            '<div class="time-segment">' +
+              '<div class="flip-digit" data-position="4">' + seconds[0] + '</div>' +
+              '<div class="flip-digit" data-position="5">' + seconds[1] + '</div>' +
+            '</div>'
+          );
+        } else {
+          // Update only changed digits
+          for (var i = 0; i < 6; i++) {
+            if (currentTime[i] !== previousTime[i]) {
+              var digit = ticker.find('.flip-digit[data-position="' + i + '"]');
+              digit.addClass('flipping');
+              digit.text(currentTime[i]);
+
+              setTimeout(function(d) {
+                d.removeClass('flipping');
+              }, 600, digit);
+            }
+          }
+        }
+
+        previousTime = currentTime;
+      }
+
+      updateTimeTicker();
+      setInterval(updateTimeTicker, 1000);
+
+      // Header scroll effect
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 50) {
+          $('#header').addClass('scrolled');
+        } else {
+          $('#header').removeClass('scrolled');
+        }
+      });
+
+      // Generate particles
+      function createParticles() {
+        var particlesContainer = $('#particles');
+        var particleCount = 50;
+
+        for (var i = 0; i < particleCount; i++) {
+          var particle = $('<div class="particle"></div>');
+          var startLeft = Math.random() * 100;
+          var delay = Math.random() * 20;
+          var duration = 15 + Math.random() * 10;
+
+          particle.css({
+            left: startLeft + '%',
+            animationDelay: delay + 's',
+            animationDuration: duration + 's'
+          });
+
+          particlesContainer.append(particle);
+        }
+      }
+
+      createParticles();
+
+      // Smooth scrolling for anchor links
+      $('a[href^="#"]').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+          $('html, body').stop().animate({
+            scrollTop: target.offset().top
+          }, 1000);
+        }
+      });
+
+      // Glass card hover effect - parallax
+      $('.glass-card').mousemove(function(e) {
+        var card = $(this);
+        var rect = this.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+
+        var centerX = rect.width / 2;
+        var centerY = rect.height / 2;
+
+        var deltaX = (x - centerX) / centerX;
+        var deltaY = (y - centerY) / centerY;
+
+        card.css('transform', 'perspective(1000px) rotateY(' + (deltaX * 5) + 'deg) rotateX(' + (-deltaY * 5) + 'deg)');
+      });
+
+      $('.glass-card').mouseleave(function() {
+        $(this).css('transform', 'perspective(1000px) rotateY(0deg) rotateX(0deg)');
+      });
+
+      // Counter animation
+      function animateCounter(element) {
+        var target = element.text();
+        if (target === '∞') return;
+
+        var count = parseInt(target);
+        if (isNaN(count)) return;
+
+        $({ countNum: 0 }).animate({
+          countNum: count
+        }, {
+          duration: 2000,
+          easing: 'swing',
+          step: function() {
+            element.text(Math.floor(this.countNum) + '+');
+          },
+          complete: function() {
+            element.text(count + '+');
+          }
+        });
+      }
+
+      // Trigger counter animation on scroll
+      var counterAnimated = false;
+      $(window).scroll(function() {
+        if (!counterAnimated && $('.stats-section').length) {
+          var statsTop = $('.stats-section').offset().top;
+          var windowBottom = $(window).scrollTop() + $(window).height();
+
+          if (windowBottom > statsTop) {
+            $('.stat-number').each(function() {
+              animateCounter($(this));
+            });
+            counterAnimated = true;
+          }
+        }
+      });
+
+      // Add ripple effect to social links
+      $('.social-link').on('mouseenter', function(e) {
+        var ripple = $('<span class="ripple"></span>');
+        $(this).append(ripple);
+
+        setTimeout(function() {
+          ripple.remove();
+        }, 600);
+      });
+
+      // Dice Game Functionality
+      function createDiceFace(value) {
+        var dots = '';
+        var faceClass = 'dice-face dice-face-' + value;
+
+        for (var i = 0; i < value; i++) {
+          dots += '<div class="dice-dot"></div>';
+        }
+
+        return '<div class="' + faceClass + '">' + dots + '</div>';
+      }
+
+      function rollDice() {
+        var dice1 = $('#dice1');
+        var dice2 = $('#dice2');
+        var resultDiv = $('#diceResult');
+        var rollBtn = $('#rollBtn');
+
+        // Disable button during roll
+        rollBtn.prop('disabled', true);
+        resultDiv.removeClass('show').text('');
+
+        // Add rolling animation
+        dice1.addClass('rolling');
+        dice2.addClass('rolling');
+
+        // Generate random numbers
+        var result1 = Math.floor(Math.random() * 6) + 1;
+        var result2 = Math.floor(Math.random() * 6) + 1;
+        var total = result1 + result2;
+
+        // Update dice after animation
+        setTimeout(function() {
+          dice1.removeClass('rolling').html(createDiceFace(result1));
+          dice2.removeClass('rolling').html(createDiceFace(result2));
+
+          // Show result
+          var resultText = 'You rolled: ' + result1 + ' + ' + result2 + ' = ' + total;
+
+          if (total === 12) {
+            resultText += ' 🎉 Double Six! Lucky!';
+          } else if (total === 2) {
+            resultText += ' 🎲 Snake Eyes!';
+          } else if (result1 === result2) {
+            resultText += ' 🎯 Doubles!';
+          }
+
+          resultDiv.text(resultText).addClass('show');
+
+          // Re-enable button
+          rollBtn.prop('disabled', false);
+        }, 800);
+      }
+
+      // Initialize dice with random faces
+      $('#dice1').html(createDiceFace(Math.floor(Math.random() * 6) + 1));
+      $('#dice2').html(createDiceFace(Math.floor(Math.random() * 6) + 1));
+
+      // Roll button click event
+      $('#rollBtn').on('click', rollDice);
+
+      // Click on individual dice to roll
+      $('.dice').on('click', rollDice);
+    });
+  </script>
+</body>
+</html>
